@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Día de las Flores Amarillas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fffde7;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            z-index: 10;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(245, 127, 23, 0.2);
+            animation: popIn 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            max-width: 90%;
+        }
+        h1 {
+            color: #fbc02d;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        p {
+            color: #d84315;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .flower {
+            position: absolute;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .heartbeat {
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Feliz Día de las Flores Amarillas! 🌻</h1>
+        <p>A la niña más bonita de todas <span class="heartbeat">💛</span></p>
+    </div>
+    <script>
+        const emojis = ['🌻', '🌼', '✨', '💛'];
+        const createFlower = () => {
+            const f = document.createElement('div');
+            f.className = 'flower';
+            f.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            f.style.left = Math.random() * 100 + 'vw';
+            f.style.animationDuration = Math.random() * 3 + 3 + 's'; // 3s to 6s
+            f.style.animationDelay = Math.random() * 2 + 's';
+            f.style.fontSize = Math.random() * 2 + 1 + 'em';
+            document.body.appendChild(f);
+            
+            // Elimina los elementos para no saturar la memoria
+            setTimeout(() => {
+                f.remove();
+            }, 6000);
+        };
+        
+        // Explosión inicial de flores
+        for (let i = 0; i < 20; i++) {
+            createFlower();
+        }
+        
+        // Caída continua
+        setInterval(createFlower, 300);
+    </script>
+</body>
+</html>
